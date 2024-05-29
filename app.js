@@ -13,7 +13,7 @@ const commentsRouter = require('./routes/comments');
 const app = express(); // Express 애플리케이션 생성
 
 // 포트 설정 -> 환경 변수에서 PORT를 가져오거나 포트 기본값을 3002로 설정
-app.set('port', process.env.PORT || 3002);
+app.set('port', process.env.PORT || 3004);
 app.set('view engine', 'html'); // 뷰 엔진 -> html로 설정
 
 // Nunjucks 설정
@@ -49,9 +49,9 @@ app.use((req, res, next) => {
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
     // 에러 메세지와 환경에 따라 다르게 처리
-    req.locals.message = err.message; // 에러 메시지를 지역 변수에 저장
+    res.locals.message = err.message; // 에러 메시지를 지역 변수에 저장
     // 개발 환경에서만 에러 객체 전달
-    req.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
     res.status(err.status || 500); // 에러 상태 설정 -> 기본값은 500(서버 내부 오류)
     res.render('error'); // 에러 페이지 렌더링 -> 클라이언트에게 전달
 });

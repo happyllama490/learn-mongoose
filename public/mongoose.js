@@ -44,11 +44,11 @@ async function getUser() {
 async function getComment(id) {
     try {
         const res = await axios.get(`/users/${id}/comments`); // 서버로부터 해당 사용자의 댓글을 가져옵니다.
-        const comment = res.data; // 가져온 댓글 정보를 변수에 저장
+        const comments = res.data; // 가져온 댓글 정보를 변수에 저장
         const tbody = document.querySelector('#comment-list tbody'); // 댓글 목록이 표시될 테이블의 tbody를 선택
         tbody.innerHTML = ''; // 이전에 추가된 내용 삭제
         // 가져온 댓글 정보를 순회하며 테이블에 댓글을 추가
-        customElements.map(function (comment) {
+        comments.map(function (comment) {
         // 각 댓글의 정보를 담는 새로운 행을 생성
         const row = document.createElement('tr');
         // 각 댓글의 ID를 표시하는 셀을 생성하고 콘텐츠를 추가
